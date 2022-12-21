@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+</head>
+
+<link rel="stylesheet" href="static/css/gen.css">
+<body>
+
+    <br><br><br><br>
+    <br><br><br><br>
+
+    <div align="center" class="container">
+        <table class="text-center">
+            <tr>
+                <div id="prev-ans">
+                    <h2 align="right" id="ans" style="color: greenyellow"></h2>
+                </div>
+                <h1 class="display" 
+                id="scr" 
+                style="background-color: white; 
+                color: black; 
+                text-align: end;"></h1>
+            </tr>
+
+            <tr>
+                <th><button type="button" onclick="get_btn_val('ans')" id="help_btn"><h1>Ans</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('clr')" id="help_btn"><h1>Clr</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('del')" id="help_btn"><h1>Del</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('/')" id="op-btn"><h1>/</h1></button></th>
+            </tr>
+            
+            <tr>
+                <th><button type="button" onclick="get_btn_val('7')" id="num-btn"><h1>7</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('8')" id="num-btn"><h1>8</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('9')" id="num-btn"><h1>9</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('*')" id="op-btn"><h1>*</h1></button></th>
+            </tr>
+            
+            <tr>
+                <th><button type="button" onclick="get_btn_val('4')" id="num-btn"><h1>4</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('5')" id="num-btn"><h1>5</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('6')" id="num-btn"><h1>6</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('-')" id="op-btn"><h1>-</h1></button></th>
+            </tr>
+            
+            <tr>
+                <th><button type="button" onclick="get_btn_val('1')" id="num-btn"><h1>1</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('2')" id="num-btn"><h1>2</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('3')" id="num-btn"><h1>3</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('+')" id="op-btn"><h1>+</h1></button></th>
+            </tr>
+            
+            <tr>
+                <th><button type="button" onclick="get_btn_val('0')" id="num-btn"><h1>0</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('00')" id="num-btn"><h1>00</h1></button></th>
+                <th><button type="button" onclick="get_btn_val('.')" id="num-btn"><h1>.</h1></button></th>
+                <th><button type="button" onclick="calculate()" id="eql"><h1>=</h1></button></th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var data = []; // array to store the user entry data
+        var ans = 0; // var to store the final output/answer
+
+        // function to display val on scr and consol
+        function show_val(){
+            document.getElementById('scr').innerHTML = data.toString().replaceAll(',', '');
+            console.log("Scr View: "+data.toString().replaceAll(',', ' '));
+        }
+
+
+        // function to take value from the btn pressed
+        function get_btn_val(val) {
+
+            // conditon statement to clr the screen
+            if (val == 'clr'){
+                data = [];
+                console.clear()
+                console.log(data)
+                document.getElementById('scr').innerHTML = '';
+            }
+
+            // conditon statement to delete the last entry
+            else if (val == 'del') {
+                data.pop()
+                console.log(data)
+                show_val();
+            }
+
+            // conditon statement to use the last output/answer
+            else if (val == 'ans') {
+                for(i=0; i<data.length; i++){data.pop()}
+                data.push(ans)
+                console.log(data)
+                show_val();
+            }
+
+            // conditon statement to push and display the user entry operator
+            else if ((val == '+') || (val == '-') || (val == '/') || (val == '*')) {
+                data.push(val);
+                console.log(data)
+                show_val();
+            }
+
+            // conditon statement to push and display the user entry num
+            else {
+                if (data.length == 0) {
+                    data.push(val)
+                    console.log(data)
+
+                    show_val();
+
+                }
+
+                else {
+                    var lst_el = data[data.length - 1];
+                    if ((lst_el == '+') || (lst_el == '-') || (lst_el == '/') || (lst_el == '*')){
+                        data.push(val);
+                        console.log(data)
+                        show_val();
+                    }
+
+                    else {
+                        data[data.length - 1] += val;
+                        console.log(data)
+                        show_val();
+                    }
+                }
+            }
+        }
+
+
+        // function to calculate the data entered by user
+        function calculate(){
+            if ('+' == data[1]){
+                ans = parseInt(data[0]) + parseInt(data[2]);
+            }
+
+            else if ('-' == data[1]){
+                ans = parseInt(data[0]) - parseInt(data[2]);
+            }
+
+            else if ('*' == data[1]){
+                ans = parseInt(data[0]) * parseInt(data[2]);
+            }
+
+            else if ('/' == data[1]){
+                ans = parseInt(data[0]) / parseInt(data[2]);
+            }
+
+            console.log("Final Ans: "+ans);
+            document.getElementById('scr').innerHTML = ans;
+            document.getElementById('ans').innerHTML = "Previous Ans: "+ans;
+        }
+    </script>
+
+</body>
+</html>

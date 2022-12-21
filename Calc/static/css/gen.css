@@ -1,0 +1,35 @@
+body {
+    background-color: black;
+}
+
+button {
+    width: 2cm;
+    height: 2cm;
+    border-radius: 1cm;
+}
+
+.display {
+    width: 8.2cm;
+    height: 1cm;
+}
+
+#prev-ans {
+    width: 8.2cm;
+    height: 1cm;
+}
+
+#op-btn {
+    background-color: rgb(249, 144, 3);
+}
+
+#num-btn {
+    background-color: rgb(54, 55, 56);
+}
+
+#help-btn {
+    background-color: rgb(115, 116, 119);
+}
+
+#eql {
+    background-color: rgb(131, 184, 60);
+}
