@@ -33,3 +33,9 @@ button {
 #eql {
     background-color: rgb(131, 184, 60);
 }
+
+#scr {
+    background-color: white; 
+    text-color: black; 
+    text-align: end;
+}
